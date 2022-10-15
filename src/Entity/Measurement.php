@@ -26,6 +26,14 @@ class Measurement
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 9)]
     private ?string $humidity = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Description $description = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Location $location = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +83,30 @@ class Measurement
     public function setHumidity(string $humidity): self
     {
         $this->humidity = $humidity;
+
+        return $this;
+    }
+
+    public function getDescription(): ?Description
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?Description $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): self
+    {
+        $this->location = $location;
 
         return $this;
     }
