@@ -10,12 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class WeatherController extends AbstractController
 {
-    public function cityAction(Location $city, MeasurementRepository $measurementRepository): Response
+    public function cityAction(string $country, string $city, MeasurementRepository $measurementRepository): Response
     {
-        $measurements = $measurementRepository->findByLocation($city);
+        $measurements = $measurementRepository->findByLocation($country, $city);
 
         return $this->render('weather/city.html.twig', [
-           'location' => $city,
+           'country' => $country,
+           'city' => $city,
            'measurements' => $measurements,
         ]);
     }
