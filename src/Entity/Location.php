@@ -17,10 +17,10 @@ class Location
     #[ORM\Column(length: 510)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 7)]
     private ?string $longitude = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 8)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 7)]
     private ?string $latitude = null;
 
     #[ORM\ManyToOne]
@@ -78,5 +78,9 @@ class Location
         $this->country = $country;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->getName();
     }
 }

@@ -32,4 +32,8 @@ class Description
 
         return $this;
     }
+
+    public function __toString() {
+        return $this->getDescription();
+    }
 }
