@@ -34,4 +34,11 @@ class WeatherUtil
         $measurements = $this->measurementRepository->findByLocation($location);
         return $measurements;
     }
+
+    public function getWeatherForLocationId($locationId)
+    {
+        $location = $this->locationRepository->find($locationId);
+        $measurements = $this->measurementRepository->findByLocation($location);
+        return $measurements;
+    }
 }
