@@ -12,10 +12,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'weather:location',
+    name: 'weather:country-and-city',
     description: 'Add a short description for your command',
 )]
-class WeatherLocationCommand extends Command
+class WeatherCountryAndCityCommand extends Command
 {
     public function __construct(WeatherUtil $weatherUtil, string $name = null)
     {
@@ -26,17 +26,20 @@ class WeatherLocationCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('location_id', InputArgument::REQUIRED,
-                'Id of location for which to get the measurements')
+            ->addArgument('country_code', InputArgument::REQUIRED,
+                'Country code for which to get the measurements')
+            ->addArgument('city_name', InputArgument::REQUIRED,
+                'City for which to get the measurements')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $locationId = $input->getArgument('location_id');
+        $countryCode = $input->getArgument('country_code');
+        $cityName = $input->getArgument('city_name');
 
-        $measurements = $this->weatherUtil->getWeatherForLocationId($locationId);
+        $measurements = $this->weatherUtil->getWeatherForCountryAndCity($countryCode, $cityName);
         foreach ($measurements as $measurement)
             $io->text($measurement);
 
