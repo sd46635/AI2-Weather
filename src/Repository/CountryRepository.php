@@ -39,6 +39,18 @@ class CountryRepository extends ServiceEntityRepository
         }
     }
 
+    public function findSingleIdByCode(string $code): int
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.code = :code')
+            ->setParameter('code', $code)
+            ->select('c.id as countryId');
+
+        $query = $qb->getQuery();
+        $result = $query->getSingleResult();
+        return $result['countryId'];
+    }
+
 //    /**
 //     * @return Country[] Returns an array of Country objects
 //     */
